@@ -41,6 +41,18 @@
       "projectFolder": "processors/localstorage-processor",
       "reviewCategory": "processors",
       "versionPolicyName": "processor"
+    },
+    {
+      "packageName": "@compass-aiden/locker-sessionstorage-processor",
+      "projectFolder": "processors/sessionstorage-processor",
+      "reviewCategory": "processors",
+      "versionPolicyName": "processor"
+    },
+    {
+      "packageName": "@compass-aiden/locker-ram-processor",
+      "projectFolder": "processors/ram-processor",
+      "reviewCategory": "processors",
+      "versionPolicyName": "processor"
     }
   ]
 }

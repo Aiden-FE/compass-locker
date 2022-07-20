@@ -1,0 +1,17 @@
+{
+  "name": "@compass-aiden/locker-sessionstorage-processor",
+  "entries": [
+    {
+      "version": "1.0.1",
+      "tag": "@compass-aiden/locker-sessionstorage-processor_v1.0.1",
+      "date": "Wed, 20 Jul 2022 07:34:42 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "session处理器"
+          }
+        ]
+      }
+    }
+  ]
+}

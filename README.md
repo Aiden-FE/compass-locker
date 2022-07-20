@@ -13,8 +13,8 @@
 ## Roadmap
 
 - [x] 增加 localStorage 存储处理器
-- [ ] 增加 sessionStorage 存储处理器
-- [ ] 增加 RAM运行内存 存储处理器
+- [x] 增加 sessionStorage 存储处理器
+- [x] 增加 RAM运行内存 存储处理器
 - [ ] 增加 IndexDB 存储处理器
 - [ ] 增加 Redis 存储处理器
 
@@ -31,6 +31,8 @@
 可用的处理列表:
 
 * `@compass-aiden/locker-localstorage-processor` localStorage处理器,可运行在web环境中
+* `@compass-aiden/locker-sessionstorage-processor` sessionStorage处理器,可运行在web环境中
+* `@compass-aiden/locker-ram-processor` RAM运存处理器,可运行在任何js环境中
 
 ### 使用
 
@@ -217,3 +219,11 @@ export class LockerProcessorAbstract {
 
 `cd common/autoinstallers/common-command`
 `npm run publish:all` 发布包
+
+提交所有变更:
+
+`git add -A`
+
+`git commit -m [message]`
+
+`git push`

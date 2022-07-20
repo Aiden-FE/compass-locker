@@ -1,7 +1,7 @@
 {
-  "name": "@compass-aiden/locker",
-  "version": "1.0.2",
-  "description": "数据存储工具",
+  "name": "@compass-aiden/locker-ram-processor",
+  "version": "1.0.1",
+  "description": "RAM处理器",
   "main": "dist/main.js",
   "types": "types/main.d.ts",
   "files": [
@@ -49,5 +49,8 @@
     "ts-jest": "~28.0.7",
     "typedoc": "^0.22.18",
     "typescript": "~4.7.4"
+  },
+  "dependencies": {
+    "@compass-aiden/locker": "workspace:*"
   }
 }

@@ -1,14 +1,11 @@
-# Change Log - @compass-aiden/locker
+# Change Log - @compass-aiden/locker-ram-processor
 
 This log was last generated on Wed, 20 Jul 2022 07:34:42 GMT and should not be manually modified.
 
-## 1.0.2
+## 1.0.1
 Wed, 20 Jul 2022 07:34:42 GMT
 
-_Version update only_
+### Patches
 
-## 1.0.1
-Wed, 20 Jul 2022 03:43:48 GMT
-
-_Initial release_
+- 运行内存处理器
 
