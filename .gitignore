@@ -71,3 +71,5 @@ common/autoinstallers/*/.npmrc
 types
 dist
 stats.html
+
+.idea

@@ -9,7 +9,7 @@
     "types"
   ],
   "author": "aiden_fe <aiden_fe@outlook.com>",
-  "repository": "",
+  "repository": "https://github.com/Aiden-FE/compass-locker.git",
   "scripts": {
     "start": "npm run dev",
     "prepublish": "npm run lint && npm run build",
