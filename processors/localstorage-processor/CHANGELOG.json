@@ -1,0 +1,17 @@
+{
+  "name": "@compass-aiden/locker-localstorage-processor",
+  "entries": [
+    {
+      "version": "1.0.1",
+      "tag": "@compass-aiden/locker-localstorage-processor_v1.0.1",
+      "date": "Wed, 20 Jul 2022 03:43:48 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "新增localstorage处理器"
+          }
+        ]
+      }
+    }
+  ]
+}

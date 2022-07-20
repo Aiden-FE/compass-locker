@@ -1,0 +1,12 @@
+[
+  {
+    "definitionName": "lockStepVersion",
+    "policyName": "locker",
+    "version": "1.0.1",
+    "nextBump": "patch"
+  },
+  {
+    "definitionName": "individualVersion",
+    "policyName": "processor"
+  }
+]

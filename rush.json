@@ -1,0 +1,46 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
+  "rushVersion": "5.71.0",
+  "pnpmVersion": "6.7.1",
+  "pnpmOptions": {
+    "strictPeerDependencies": false,
+    "preventManualShrinkwrapChanges": true,
+    "useWorkspaces": true
+  },
+  "nodeSupportedVersionRange": ">=12.13.0 <13.0.0 || >=14.15.0 <15.0.0 || >=16.13.0 <17.0.0",
+  "ensureConsistentVersions": false,
+  "projectFolderMinDepth": 2,
+  "projectFolderMaxDepth": 2,
+  "gitPolicy": {},
+  "repository": {
+    "url": "https://github.com/Aiden-FE/tentacle.git",
+    "defaultBranch": "master",
+    "defaultRemote": "origin"
+  },
+  "eventHooks": {
+    "preRushInstall": [],
+    "postRushInstall": [],
+    "preRushBuild": [],
+    "postRushBuild": []
+  },
+  "variants": [],
+  "projects": [
+    {
+      "packageName": "use-locker-demo",
+      "projectFolder": "examples/use-locker-demo",
+      "shouldPublish": false
+    },
+    {
+      "packageName": "@compass-aiden/locker",
+      "projectFolder": "libraries/locker-core",
+      "reviewCategory": "libraries",
+      "versionPolicyName": "locker"
+    },
+    {
+      "packageName": "@compass-aiden/locker-localstorage-processor",
+      "projectFolder": "processors/localstorage-processor",
+      "reviewCategory": "processors",
+      "versionPolicyName": "processor"
+    }
+  ]
+}
