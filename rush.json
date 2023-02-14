@@ -49,8 +49,8 @@
       "versionPolicyName": "processor"
     },
     {
-      "packageName": "@compass-aiden/locker-ram-processor",
-      "projectFolder": "processors/ram-processor",
+      "packageName": "@compass-aiden/locker-memory-processor",
+      "projectFolder": "processors/memory-processor",
       "reviewCategory": "processors",
       "versionPolicyName": "processor"
     }

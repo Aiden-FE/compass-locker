@@ -1,7 +1,7 @@
 {
-  "name": "@compass-aiden/locker-ram-processor",
-  "version": "1.0.1",
-  "description": "RAM处理器",
+  "name": "@compass-aiden/locker-memory-processor",
+  "version": "1.0.2",
+  "description": "memory处理器",
   "main": "dist/main.js",
   "types": "types/main.d.ts",
   "files": [

@@ -1,6 +1,6 @@
 import { LockerProcessorAbstract, LockerProcessorInitOption, OriginLockerItem } from '@compass-aiden/locker';
 
-export default class LockerRAMStorageProcessor extends LockerProcessorAbstract {
+export default class LockerMemoryStorageProcessor extends LockerProcessorAbstract {
   private option!: LockerProcessorInitOption;
 
   private maxBufferSize = 0;

@@ -4,17 +4,17 @@
 ## Feature
 
 * 适用于各平台的数据管理工具
-* 灵活地可扩展处理器,自由的定制各平台存储工具
-* 小巧的体积,Gzip后仅1.64kB
-* 无依赖的核心模块
-* 风格一致的API,贴近storage用法
 * 跨平台适用,可以运行在任何js环境内,仅需选择对应环境可执行的处理器即可
+* 易扩展,自由的定制适用于自身业务的存储工具
+* 无依赖的核心模块,Gzip后仅1.64kB
+* 可控制存储数据的失效时间,并支持数据读取后刷新失效时间
+* 支持限制存储数据的最大容量
 
 ## Roadmap
 
 - [x] 增加 localStorage 存储处理器
 - [x] 增加 sessionStorage 存储处理器
-- [x] 增加 RAM运行内存 存储处理器
+- [x] 增加 memory 存储处理器
 - [ ] 增加 IndexDB 存储处理器
 - [ ] 增加 Redis 存储处理器
 
@@ -32,7 +32,7 @@
 
 * `@compass-aiden/locker-localstorage-processor` localStorage处理器,可运行在web环境中
 * `@compass-aiden/locker-sessionstorage-processor` sessionStorage处理器,可运行在web环境中
-* `@compass-aiden/locker-ram-processor` RAM运存处理器,可运行在任何js环境中
+* `@compass-aiden/locker-memory-processor` memory处理器,可运行在任何js环境中
 
 ### 使用
 
