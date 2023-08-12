@@ -7,7 +7,7 @@
     "preventManualShrinkwrapChanges": true,
     "useWorkspaces": true
   },
-  "nodeSupportedVersionRange": ">=12.13.0 <13.0.0 || >=14.15.0 <15.0.0 || >=16.13.0 <17.0.0",
+  "nodeSupportedVersionRange": ">=12.13.0 <13.0.0 || >=14.15.0 <15.0.0 || >=16.13.0 <17.0.0 || >=18",
   "ensureConsistentVersions": false,
   "projectFolderMinDepth": 2,
   "projectFolderMaxDepth": 2,

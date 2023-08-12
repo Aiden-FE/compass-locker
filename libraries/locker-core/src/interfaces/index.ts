@@ -1,4 +1,6 @@
 import Logger from '~/logger';
+import LockerProcessorAbstract from '~/processor-abstract';
+import Locker from '~/core';
 
 /**
  * @description locker处理器的初始化选项
@@ -15,71 +17,15 @@ export interface LockerProcessorInitOption {
   prefixKey: string
 
   /**
+   * @description 运行实例
+   */
+  instance: Locker;
+
+  /**
    * @description 最大容量限制, 单位MB, 0就是不限制
    * @default 0
    */
   maximum?: number
-}
-
-/**
- * @description 实际处理locker的抽象类
- */
-export class LockerProcessorAbstract {
-  /**
-   * @description 初始化
-   * @abstract
-   */
-  // eslint-disable-next-line class-methods-use-this,@typescript-eslint/no-unused-vars
-  initialize(option: LockerProcessorInitOption) {}
-
-  /**
-   * @description 定期执行的垃圾清理方法
-   * @abstract
-   */
-  // eslint-disable-next-line class-methods-use-this
-  clearGarbage() {}
-
-  /**
-   * @description API 可用性检查
-   * @param key
-   * @abstract
-   */
-  // eslint-disable-next-line class-methods-use-this,@typescript-eslint/no-unused-vars
-  validate(key: 'setItem' | 'getItem' | 'clear' | 'removeItem'): boolean {
-    return false;
-  }
-
-  /**
-   * @description 设置存储
-   * @param item
-   * @abstract
-   */
-  // eslint-disable-next-line class-methods-use-this,@typescript-eslint/no-unused-vars
-  set(item: OriginLockerItem): void {}
-
-  /**
-   * @description 获取存储
-   * @param key
-   * @abstract
-   */
-  // @ts-ignore
-  // eslint-disable-next-line class-methods-use-this,@typescript-eslint/no-unused-vars
-  get(key: string): OriginLockerItem | null {}
-
-  /**
-   * @description 移除存储
-   * @param key
-   * @abstract
-   */
-  // eslint-disable-next-line class-methods-use-this,@typescript-eslint/no-unused-vars
-  remove(key: string): void {}
-
-  /**
-   * @description 清空所有存储
-   * @abstract
-   */
-  // eslint-disable-next-line class-methods-use-this
-  clear(): void {}
 }
 
 export interface OriginLockerItem extends LockerItem {
@@ -114,6 +60,11 @@ export interface LockerSettings<Processor extends LockerProcessorAbstract> {
    * @default false
    */
   debug?: boolean
+
+  /**
+   * @description 实例创建完成后的回调函数
+   */
+  created?: () => void
 }
 
 export type LockerItemType = 'undefined'

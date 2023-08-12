@@ -16,23 +16,24 @@
 
 <script setup lang="ts">
 import {Locker} from "@compass-aiden/locker";
-import LockerRAMStorageProcessor from "@compass-aiden/locker-ram-processor";
+import LockerLocalStorageProcessor from "@compass-aiden/locker-localstorage-processor";
 
 const currentKey = ref('')
 const currentValue = ref('')
 
 const localLocker = new Locker({
-  lockerKey: 'test',
-  processor: new LockerRAMStorageProcessor(),
+  lockerKey: 'example',
+  processor: new LockerLocalStorageProcessor(),
   maximum: 0.001,
+  clearGarbageInterval: 10000,
   debug: true,
 })
 
 function setStorage() {
-  localLocker.setItem(currentKey.value, currentValue.value, { autoReadRefresh: true, expires: 15000 })
+  localLocker.setItem(currentKey.value, currentValue.value, { expires: 5000, autoReadRefresh: true })
 }
-function getStorage() {
-  console.log(localLocker.getItem(currentKey.value))
+async function getStorage() {
+  console.log(await localLocker.getItem(currentKey.value))
 }
 function removeStorage() {
   localLocker.removeItem(currentKey.value)

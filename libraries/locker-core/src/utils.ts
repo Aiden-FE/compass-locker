@@ -2,6 +2,10 @@ import {
   LockerItem, LockerItemType, LockerItemValue, OriginLockerItem,
 } from '~/interfaces';
 
+export const STRING_DELIMITER = '―';
+
+export const INTERNAL_PREFIX = `CPLocker${STRING_DELIMITER}` as const;
+
 /**
  * @description 获取数据大小
  * @param value
@@ -71,7 +75,7 @@ export function valueStringToValue(item: OriginLockerItem | null): LockerItem | 
  * @return {boolean} true 过期 false 未过期
  */
 export function isExpired(item: LockerItem) {
-  return item.expires !== 0 && Date.now() > (item.expires + new Date(item.updatedAt).getTime());
+  return (item.expires !== 0 && Date.now()) > (item.expires + new Date(item.updatedAt).getTime());
 }
 
 /**
