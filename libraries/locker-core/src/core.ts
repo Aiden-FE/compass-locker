@@ -13,10 +13,6 @@ import {
 } from '~/utils';
 import LockerProcessorAbstract from '~/processor-abstract';
 
-/**
- * @todo
- *  3. 支持CI/CD
- */
 export default class Locker<Processor extends LockerProcessorAbstract = LockerProcessorAbstract> {
   private readonly processor: Processor;
 
@@ -100,7 +96,7 @@ export default class Locker<Processor extends LockerProcessorAbstract = LockerPr
       this.logger.error('无法将值进行序列化,请检查数据是否可被 JSON.stringify 处理');
       return;
     }
-    const cache = await this.getItem<LockerItem>(key, true);
+    const cache = await this.getItem<LockerItem>(key, { full: true });
     let { autoReadRefresh, defaultExpires } = this.settings;
     if (opts?.expires === undefined && cache) {
       defaultExpires = cache.expires;
@@ -131,9 +127,14 @@ export default class Locker<Processor extends LockerProcessorAbstract = LockerPr
   /**
    * @description 获取存储数据
    * @param key
-   * @param full true 获取全部结构数据, false则只取存储的 value 值
+   * @param [option]
    */
-  async getItem<T = any>(key: string, full = false): Promise<T | null> {
+  async getItem<T = any>(key: string, option?: { full?: boolean }): Promise<T | null> {
+    const { full } = {
+      full: false,
+      ...option,
+    };
+
     if (!this.processor.validate('getItem')) {
       this.logger.error('当前运行环境不支持 getItem API.');
       return null;

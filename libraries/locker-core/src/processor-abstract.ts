@@ -3,7 +3,7 @@ import Locker from '~/core';
 import { LockerItem, LockerProcessorInitOption, OriginLockerItem } from './interfaces';
 
 /**
- * @description 实际处理locker的抽象类
+ * @description 实际处理locker的基类
  */
 export default class LockerProcessorAbstract {
   protected option!: LockerProcessorInitOption;
