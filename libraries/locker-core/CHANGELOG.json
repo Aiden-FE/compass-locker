@@ -2,6 +2,18 @@
   "name": "@compass-aiden/locker",
   "entries": [
     {
+      "version": "2.0.0",
+      "tag": "@compass-aiden/locker_v2.0.0",
+      "date": "Sun, 13 Aug 2023 04:21:42 GMT",
+      "comments": {
+        "none": [
+          {
+            "comment": "chore: publish 2.0.0"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.4",
       "tag": "@compass-aiden/locker_v1.0.4",
       "date": "Sun, 13 Aug 2023 04:07:10 GMT",
