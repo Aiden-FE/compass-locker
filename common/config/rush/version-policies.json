@@ -3,7 +3,7 @@
     "definitionName": "lockStepVersion",
     "policyName": "locker",
     "version": "2.0.0",
-    "nextBump": "major"
+    "nextBump": "patch"
   },
   {
     "definitionName": "individualVersion",
