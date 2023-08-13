@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@compass-aiden/locker-memory-processor",
+      "comment": "feat(#3): upgrade to 2.0",
+      "type": "major"
+    }
+  ],
+  "packageName": "@compass-aiden/locker-memory-processor"
+}
