@@ -44,7 +44,7 @@ import LockerLocalStorageProcessor from "@compass-aiden/locker-localstorage-proc
 const localLocker = new Locker({
   processor: new LockerLocalStorageProcessor(), // 实际处理器,可任意替换当前环境可用的处理器
   lockerKey: 'user_id', // 可选, 唯一存储key,用来跟其他Locker实例区分或用来隔离用户数据
-  // 更多可配置项参考
+  // 更多可配置项参考下方 初始化配置项
 });
 
 // 设置存储 option可选,对象结构. expires 超时时间, 单位ms, 0=永不超时,默认为0;autoReadRefresh 数据被读取后自动刷新超时时间,默认为false
@@ -145,8 +145,7 @@ export class LockerProcessorAbstract {
    * 2. 如果会溢出限制,调用基类 clearDataBySize 方法,尝试清理指定空间
    * 3. 如果清理的空间大小仍旧小于插入项大小停止写入并抛出异常
    * 4. 不会溢出限制则执行写入
-   * 5. 写入完成执行基类 refreshBufferSize 方法,同步最新存储大小,流程结束. 执行refreshBufferSize方法无需await
-   * 6. 写入失败抛出异常
+   * 5. 写入失败抛出异常
    *
    * @param item
    * @abstract
@@ -161,7 +160,7 @@ export class LockerProcessorAbstract {
   async get(key: string): Promise<OriginLockerItem | null> {}
   
   /**
-   * @description 需要实现移除存储功能, 删除成功后调用基类 refreshBufferSize 方法,无需await
+   * @description 需要实现移除存储功能
    * @param key
    * @abstract
    */

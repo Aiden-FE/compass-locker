@@ -31,8 +31,7 @@ export default class LockerProcessorAbstract {
    * 2. 如果会溢出限制,调用基类 clearDataBySize 方法,尝试清理指定空间
    * 3. 如果清理的空间大小仍旧小于插入项大小停止写入并抛出异常
    * 4. 不会溢出限制则执行写入
-   * 5. 写入完成执行基类 refreshBufferSize 方法,同步最新存储大小,流程结束. 执行refreshBufferSize方法无需await
-   * 6. 写入失败抛出异常
+   * 5. 写入失败抛出异常
    *
    * @param item
    * @abstract
@@ -52,7 +51,7 @@ export default class LockerProcessorAbstract {
   }
 
   /**
-   * @description 需要实现移除存储功能, 删除成功后调用基类 refreshBufferSize 方法,无需await
+   * @description 需要实现移除存储功能
    * @param key
    * @abstract
    */
