@@ -2,6 +2,18 @@
   "name": "@compass-aiden/locker-sessionstorage-processor",
   "entries": [
     {
+      "version": "2.0.0",
+      "tag": "@compass-aiden/locker-sessionstorage-processor_v2.0.0",
+      "date": "Sun, 13 Aug 2023 04:07:10 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "feat(#3): upgrade to 2.0"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.1",
       "tag": "@compass-aiden/locker-sessionstorage-processor_v1.0.1",
       "date": "Wed, 20 Jul 2022 07:34:42 GMT",

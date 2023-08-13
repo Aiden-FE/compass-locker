@@ -1,6 +1,13 @@
 # Change Log - @compass-aiden/locker
 
-This log was last generated on Tue, 14 Feb 2023 07:07:24 GMT and should not be manually modified.
+This log was last generated on Sun, 13 Aug 2023 04:07:10 GMT and should not be manually modified.
+
+## 1.0.4
+Sun, 13 Aug 2023 04:07:10 GMT
+
+### Breaking changes
+
+- feat(#3): upgrade to 2.0
 
 ## 1.0.3
 Tue, 14 Feb 2023 07:07:24 GMT
