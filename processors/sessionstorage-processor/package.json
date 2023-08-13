@@ -12,7 +12,6 @@
   "repository": "https://github.com/Aiden-FE/compass-locker.git",
   "scripts": {
     "start": "npm run dev",
-    "prepublish": "npm run lint && npm run build",
     "build": "npm run clean && rollup -c config/rollup.config.prod.js",
     "dev": "rollup -w -c config/rollup.config.dev.js",
     "lint": "eslint --fix --ext .ts,.js src",

@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@compass-aiden/locker",
+      "comment": "chore: publish 2.0.0",
+      "type": "none"
+    }
+  ],
+  "packageName": "@compass-aiden/locker"
+}
