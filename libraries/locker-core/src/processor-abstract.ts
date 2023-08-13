@@ -26,6 +26,14 @@ export default class LockerProcessorAbstract {
 
   /**
    * @description 设置存储
+   *
+   * 1. 检查插入新的数据项后是否会溢出最大存储限制
+   * 2. 如果会溢出限制,调用基类 clearDataBySize 方法,尝试清理指定空间
+   * 3. 如果清理的空间大小仍旧小于插入项大小停止写入并抛出异常
+   * 4. 不会溢出限制则执行写入
+   * 5. 写入完成执行基类 refreshBufferSize 方法,同步最新存储大小,流程结束. 执行refreshBufferSize方法无需await
+   * 6. 写入失败抛出异常
+   *
    * @param item
    * @abstract
    */
@@ -44,7 +52,7 @@ export default class LockerProcessorAbstract {
   }
 
   /**
-   * @description 需要实现移除存储功能
+   * @description 需要实现移除存储功能, 删除成功后调用基类 refreshBufferSize 方法,无需await
    * @param key
    * @abstract
    */
@@ -53,7 +61,7 @@ export default class LockerProcessorAbstract {
   }
 
   /**
-   * @description 获取所有数据,垃圾回收需要扫描数据是否过期
+   * @description 获取所有数据,垃圾回收需要扫描数据是否过期, 如果扫描开销较大建议根据实际情况返回计算属性或缓存结果集
    * @abstract
    */
   // eslint-disable-next-line class-methods-use-this
@@ -78,6 +86,14 @@ export default class LockerProcessorAbstract {
   }
 
   /**
+   * @description 卸载阶段释放资源
+   */
+  destroy() {
+    this.maxBufferSize = 0;
+    this.bufferSize = 0;
+  }
+
+  /**
    * @description 刷新占用缓冲区大小
    */
   refreshBufferSize = debounce(async () => {
@@ -86,6 +102,7 @@ export default class LockerProcessorAbstract {
       totalSize += item.size;
       return totalSize;
     }, 0);
+    this.option.logger.debug('当前缓冲区大小: ', this.bufferSize);
   });
 
   /**

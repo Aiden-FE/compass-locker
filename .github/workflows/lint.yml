@@ -1,0 +1,70 @@
+name: Lint Code Base
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  lint:
+    name: Lint Code Base
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      # 设置rush cache
+      - name: Setup cache
+        uses: gigara/rush-cache@v2
+
+      # 设置 node
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # 设置pnpm
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7.27.1
+
+      # 设置 rush 缓存文件
+      - name: Cache Rush
+        uses: actions/cache@v2
+        with:
+          path: |
+            common/temp/install-run
+            ~/.rush
+          key: Rush-cache-${{ hashFiles('rush.json') }}
+
+      # 设置 pnpm 缓存文件
+      - name: Cache pnpm
+        uses: actions/cache@v3
+        with:
+          path: |
+            common/temp/pnpm-store
+          #            ~/.cache/Cypress
+          key: pnpm-cache-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+
+      # 设置 git
+      - name: Setup git
+        run: |
+          git config --local user.email aiden_fe@users.noreply.github.com
+          git config --local user.name AidenFEBot
+
+      # rush 安装
+      - name: Install rush cli
+        env:
+          HUSKY: 0
+        run: |
+          node common/scripts/install-run-rush.js install
+
+      # 检查整个仓库项目
+      - name: Run rush Build
+        run: |
+          node common/scripts/install-run-rush.js lint

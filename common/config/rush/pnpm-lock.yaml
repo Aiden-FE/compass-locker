@@ -69,6 +69,7 @@ importers:
   ../../libraries/locker-core:
     specifiers:
       '@ampproject/rollup-plugin-closure-compiler': ~0.27.0
+      '@compass-aiden/utils': ~1.7.0
       '@rollup/plugin-commonjs': ~22.0.1
       '@rollup/plugin-json': ~4.1.0
       '@rollup/plugin-node-resolve': ~13.3.0
@@ -95,6 +96,7 @@ importers:
       typedoc: ^0.22.18
       typescript: ~4.7.4
     dependencies:
+      '@compass-aiden/utils': 1.7.0
       lodash-es: 4.17.21
     devDependencies:
       '@ampproject/rollup-plugin-closure-compiler': 0.27.0_rollup@2.75.7
@@ -1528,6 +1530,10 @@ packages:
     engines: {node: '>=0.1.90'}
     dev: true
     optional: true
+
+  /@compass-aiden/utils/1.7.0:
+    resolution: {integrity: sha512-7GCJUUe5Gbf0Jg54p+/wRlkUwW7Wr8vbDHivF9itAMrTlytO4LQ+zq6IdoyPd4TpJ6PxgVT7o5nARtPAYLEruA==}
+    dev: false
 
   /@emmetio/abbreviation/2.2.3:
     resolution: {integrity: sha512-87pltuCPt99aL+y9xS6GPZ+Wmmyhll2WXH73gG/xpGcQ84DRnptBsI2r0BeIQ0EB/SQTOe2ANPqFqj3Rj5FOGA==}

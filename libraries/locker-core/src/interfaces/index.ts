@@ -1,4 +1,4 @@
-import Logger from '~/logger';
+import { Logger } from '@compass-aiden/utils';
 import LockerProcessorAbstract from '~/processor-abstract';
 import Locker from '~/core';
 
@@ -60,6 +60,18 @@ export interface LockerSettings<Processor extends LockerProcessorAbstract> {
    * @default false
    */
   debug?: boolean
+
+  /**
+   * @description 默认写入数据的超时设置,0就是不超时,单位ms
+   * @default 1000 * 10
+   */
+  defaultExpires?: number;
+
+  /**
+   * @description 数据被读取后是否自动刷新,从读取时间重新计算超时
+   * @default false
+   */
+  autoReadRefresh?: boolean;
 
   /**
    * @description 实例创建完成后的回调函数

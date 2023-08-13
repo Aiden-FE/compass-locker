@@ -1,7 +1,7 @@
+import { Logger } from '@compass-aiden/utils';
 import {
   LockerItem, LockerItemValue, LockerSettings,
 } from '~/interfaces';
-import Logger from '~/logger';
 import {
   getValueSize,
   getValueType,
@@ -15,32 +15,36 @@ import LockerProcessorAbstract from '~/processor-abstract';
 
 /**
  * @todo
- *  1. 支持设置全局默认超时与是否读取刷新
- *  2. 更新session与memory处理器
  *  3. 支持CI/CD
  */
 export default class Locker<Processor extends LockerProcessorAbstract = LockerProcessorAbstract> {
-  readonly processor: Processor;
+  private readonly processor: Processor;
 
-  readonly settings: Required<Omit<LockerSettings<Processor>, 'processor'>>;
+  private readonly settings: Required<Omit<LockerSettings<Processor>, 'processor'>>;
 
-  readonly logger: Logger;
+  private readonly logger: Logger;
 
-  readonly prefixKey: string;
+  private readonly prefixKey: string;
+
+  private garbageTimer?: number;
 
   constructor(opts: LockerSettings<Processor>) {
     this.processor = opts.processor;
     this.settings = {
       lockerKey: opts.lockerKey || 'default',
       clearGarbageInterval: opts.clearGarbageInterval === undefined
-        ? 15000
+        ? 1000 * 15
         : opts.clearGarbageInterval,
       maximum: opts.maximum === undefined ? 0 : parseInt(String(opts.maximum * 1024 * 1024), 10),
       debug: opts.debug || false,
+      autoReadRefresh: opts.autoReadRefresh || false,
+      defaultExpires: typeof opts.defaultExpires === 'undefined' ? 1000 * 10 : opts.defaultExpires,
       created: () => {},
     };
-    this.logger = new Logger({
-      debug: this.settings.debug,
+    this.logger = new Logger();
+    this.logger.updateConfig({
+      subject: 'CPLocker',
+      logLevel: this.settings.debug ? 'debug' : 'log',
     });
     this.prefixKey = `${INTERNAL_PREFIX}${this.settings.lockerKey}`;
     this.processor.initialize({
@@ -50,12 +54,27 @@ export default class Locker<Processor extends LockerProcessorAbstract = LockerPr
       instance: this,
     }).then(() => {
       // 定时垃圾回收
-      if (this.settings.clearGarbageInterval > 0) {
-        setInterval(() => this.clearGarbage(), this.settings.clearGarbageInterval);
+      if (this.settings.clearGarbageInterval > 0 && this.garbageTimer === undefined) {
+        this.garbageTimer = setInterval(
+          () => this.clearGarbage(),
+          this.settings.clearGarbageInterval,
+        );
       }
       opts.created?.();
       this.logger.success('Locker 准备就绪');
     });
+  }
+
+  /**
+   * @description 主动卸载释放内部资源
+   */
+  destroy() {
+    this.logger.debug('开始执行卸载');
+    this.processor.destroy();
+    if (this.garbageTimer) {
+      clearInterval(this.garbageTimer);
+      this.garbageTimer = undefined;
+    }
   }
 
   /**
@@ -82,20 +101,23 @@ export default class Locker<Processor extends LockerProcessorAbstract = LockerPr
       return;
     }
     const cache = await this.getItem<LockerItem>(key, true);
-    let expires = 0;
+    let { autoReadRefresh, defaultExpires } = this.settings;
     if (opts?.expires === undefined && cache) {
-      expires = cache.expires;
-    } else if (opts?.expires !== undefined && opts.expires > 0) {
-      expires = opts.expires;
+      defaultExpires = cache.expires;
+    } else if (opts?.expires !== undefined) {
+      defaultExpires = opts.expires;
+    }
+    if (opts?.autoReadRefresh === undefined && cache) {
+      autoReadRefresh = cache.autoReadRefresh;
+    } else if (opts?.autoReadRefresh !== undefined) {
+      autoReadRefresh = opts.autoReadRefresh;
     }
     const item = {
       key: cache?.key || `${this.prefixKey}${STRING_DELIMITER}${key}`,
       value: valueStr,
       type: valueType,
-      expires,
-      autoReadRefresh: opts?.autoReadRefresh === undefined && cache
-        ? cache.autoReadRefresh
-        : (opts?.autoReadRefresh || false),
+      expires: defaultExpires,
+      autoReadRefresh,
       size: 0,
       createdAt: cache?.createdAt || Date.now(),
       updatedAt: Date.now(),
@@ -103,6 +125,7 @@ export default class Locker<Processor extends LockerProcessorAbstract = LockerPr
     item.size = getValueSize(JSON.stringify(item));
     await this.processor.set(item);
     this.logger.debug('Set item', item);
+    this.processor.refreshBufferSize();
   }
 
   /**
@@ -147,6 +170,7 @@ export default class Locker<Processor extends LockerProcessorAbstract = LockerPr
     }
     await this.processor.remove(`${this.prefixKey}${STRING_DELIMITER}${key}`);
     this.logger.debug(`Remove item ${key}`);
+    this.processor.refreshBufferSize();
   }
 
   /**
@@ -158,19 +182,25 @@ export default class Locker<Processor extends LockerProcessorAbstract = LockerPr
       .forEach((item) => promiseArr.push(this.processor.remove(item.key)));
     await Promise.all(promiseArr);
     this.logger.debug('Clear all items');
+    this.processor.refreshBufferSize();
   }
 
   /**
    * @description 定期执行的垃圾清理方法
    */
   private async clearGarbage() {
-    this.logger.debug('主动垃圾回收机制执行');
     const promiseArr = [] as Promise<unknown>[];
-    (await this.processor.getAllData()).forEach((item) => {
+    const removedSize = (await this.processor.getAllData()).reduce<number>((rmSize, item) => {
       if (isExpired(item)) {
         promiseArr.push(this.processor.remove(item.key));
+        return item.size + rmSize;
       }
-    });
+      return rmSize;
+    }, 0);
     await Promise.all(promiseArr);
+    this.logger.debug('主动垃圾回收机制执行,本次回收大小: ', removedSize);
+    if (removedSize > 0) {
+      this.processor.refreshBufferSize();
+    }
   }
 }

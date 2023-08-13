@@ -52,6 +52,7 @@
     "@types/lodash-es": "~4.17.8"
   },
   "dependencies": {
-    "lodash-es": "~4.17.21"
+    "lodash-es": "~4.17.21",
+    "@compass-aiden/utils": "~1.7.0"
   }
 }

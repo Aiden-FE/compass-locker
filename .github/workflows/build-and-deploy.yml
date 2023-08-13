@@ -1,0 +1,102 @@
+# 提交代码至master前 需要对pull_request进行检查: lint/test/
+name: Build and deploy
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    tags:
+      - v*
+
+  # Allows you to run this workflow manually from the Actions tab
+#workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: 'build-and-deploy'
+  cancel-in-progress: false
+
+jobs:
+  # Build job
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 签出分支
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Get the version
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+      # 设置rush cache
+      - name: Setup cache
+        uses: gigara/rush-cache@v2
+
+      # 设置 node
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # 设置pnpm
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7.27.1
+
+      # 设置 rush 缓存文件
+      - name: Cache Rush
+        uses: actions/cache@v2
+        with:
+          path: |
+            common/temp/install-run
+            ~/.rush
+          key: Rush-cache-${{ hashFiles('rush.json') }}
+
+      # 设置 pnpm 缓存文件
+      - name: Cache pnpm
+        uses: actions/cache@v3
+        with:
+          path: |
+            common/temp/pnpm-store
+          #            ~/.cache/Cypress
+          key: pnpm-cache-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+
+      # 设置 git
+      - name: Setup git
+        run: |
+          git config --local user.email aiden_fe@users.noreply.github.com
+          git config --local user.name AidenFEBot
+
+      # rush 安装
+      - name: Install rush cli
+        env:
+          HUSKY: 0
+        run: |
+          node common/scripts/install-run-rush.js install
+
+      # 构建整个仓库项目
+      - name: Run rush Build
+        env:
+          NODE_ENV: production
+          NODE_OPTIONS: --max_old_space_size=8192
+        run: |
+          node common/scripts/install-run-rush.js rebuild --verbose
+
+      # 发布变更包
+      - name: Publish libraries
+        env:
+          NPM_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+          HUSKY: 0
+        run: |
+          node common/scripts/install-run-rush.js change --verify
+          node common/scripts/install-run-rush.js version --bump --target-branch master
+          node common/scripts/install-run-rush.js publish --publish --include-all

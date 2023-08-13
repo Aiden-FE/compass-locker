@@ -11,9 +11,12 @@
   "ensureConsistentVersions": false,
   "projectFolderMinDepth": 2,
   "projectFolderMaxDepth": 2,
-  "gitPolicy": {},
+  "gitPolicy": {
+    "versionBumpCommitMessage": "chore: bump versions",
+    "changeLogUpdateCommitMessage": "chore: update changelogs"
+  },
   "repository": {
-    "url": "https://github.com/Aiden-FE/tentacle.git",
+    "url": "https://github.com/Aiden-FE/compass-locker.git",
     "defaultBranch": "master",
     "defaultRemote": "origin"
   },

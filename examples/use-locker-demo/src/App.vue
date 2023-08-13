@@ -17,30 +17,34 @@
 <script setup lang="ts">
 import {Locker} from "@compass-aiden/locker";
 import LockerLocalStorageProcessor from "@compass-aiden/locker-localstorage-processor";
+import LockerMemoryStorageProcessor from "@compass-aiden/locker-memory-processor";
 
 const currentKey = ref('')
 const currentValue = ref('')
 
-const localLocker = new Locker({
+const locker = new Locker({
   lockerKey: 'example',
-  processor: new LockerLocalStorageProcessor(),
+  processor: new LockerMemoryStorageProcessor(),
   maximum: 0.001,
   clearGarbageInterval: 10000,
+  autoReadRefresh: true,
   debug: true,
 })
 
 function setStorage() {
-  localLocker.setItem(currentKey.value, currentValue.value, { expires: 5000, autoReadRefresh: true })
+  locker.setItem(currentKey.value, currentValue.value)
 }
 async function getStorage() {
-  console.log(await localLocker.getItem(currentKey.value))
+  console.log(await locker.getItem(currentKey.value))
 }
 function removeStorage() {
-  localLocker.removeItem(currentKey.value)
+  locker.removeItem(currentKey.value)
 }
 function clearStorage() {
-  localLocker.clear();
+  locker.clear();
 }
+
+onBeforeUnmount(() => locker.destroy());
 </script>
 
 <style scoped lang="stylus">
