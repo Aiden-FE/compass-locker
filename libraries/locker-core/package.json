@@ -1,6 +1,6 @@
 {
   "name": "@compass-aiden/locker",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "数据存储工具",
   "main": "dist/main.js",
   "types": "types/main.d.ts",

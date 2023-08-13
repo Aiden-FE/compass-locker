@@ -1,6 +1,6 @@
 {
   "name": "@compass-aiden/locker-localstorage-processor",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "localstorage处理器",
   "main": "dist/main.js",
   "types": "types/main.d.ts",
