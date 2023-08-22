@@ -75,6 +75,11 @@ export default class Locker<Processor extends LockerProcessorAbstract = LockerPr
 
   /**
    * @description 设置存储数据
+   * @param key 数据key
+   * @param value 数据值
+   * @param [opts] 配置项
+   * @param opts.expires 超时时间
+   * @param opts.autoReadRefresh 读取后是否刷新超时时间
    */
   async setItem(
     key: string,
@@ -96,7 +101,7 @@ export default class Locker<Processor extends LockerProcessorAbstract = LockerPr
       this.logger.error('无法将值进行序列化,请检查数据是否可被 JSON.stringify 处理');
       return;
     }
-    const cache = await this.getItem<LockerItem>(key, { full: true });
+    const cache = await this.getItem(key, { full: true });
     let { autoReadRefresh, defaultExpires } = this.settings;
     if (opts?.expires === undefined && cache) {
       defaultExpires = cache.expires;
@@ -126,10 +131,29 @@ export default class Locker<Processor extends LockerProcessorAbstract = LockerPr
 
   /**
    * @description 获取存储数据
-   * @param key
-   * @param [option]
+   * @param key 存储key
+   * @param option 配置项
    */
-  async getItem<T = any>(key: string, option?: { full?: boolean }): Promise<T | null> {
+  async getItem<T extends LockerItemValue = unknown>(
+    key: string, option: { full: true }
+  ): Promise<LockerItem<T> | null>;
+  /**
+   * @description 获取存储数据
+   * @param key 存储key
+   * @param [option] 配置项
+   */
+  async getItem<T extends LockerItemValue = unknown>(
+    key: string, option?: { full?: false }
+  ): Promise<T | null>;
+  /**
+   * @description 获取存储数据
+   * @param key 存储key
+   * @param [option] 配置项
+   */
+  async getItem<T extends LockerItemValue = unknown, IsFull extends boolean = false>(
+    key: string,
+    option?: { full?: IsFull },
+  ): Promise<LockerItem<T> | T | null> {
     const { full } = {
       full: false,
       ...option,
@@ -145,17 +169,17 @@ export default class Locker<Processor extends LockerProcessorAbstract = LockerPr
       originItem.updatedAt = Date.now();
       await this.processor.set(originItem);
     }
-    const item = valueStringToValue(originItem);
-    if (item && isExpired(item)) {
+    if (originItem && isExpired(originItem)) {
       this.logger.debug(`Get item ${key} 已经过期`);
-      await this.processor.remove(item.key);
+      this.removeItem(key);
       return null;
     }
+    const item = valueStringToValue(originItem);
     this.logger.debug(`Get item ${key}`, full ? item : item?.value);
     if (full) {
-      return item as unknown as T;
+      return item as LockerItem<T>;
     } if (item) {
-      return item.value as unknown as T;
+      return item.value as T;
     }
     return null;
   }

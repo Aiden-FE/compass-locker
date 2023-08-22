@@ -1,7 +1,7 @@
 # @compass-aiden/locker
 > 数据存储工具
 
-## Feature
+## 特性
 
 * 适用于各平台的数据管理工具
 * 跨平台适用,可以运行在任何js环境内,仅需选择对应环境可执行的处理器即可
@@ -10,15 +10,7 @@
 * 可控制存储数据的失效时间,并支持数据读取后刷新失效时间
 * 支持限制存储数据的最大容量
 
-## Roadmap
-
-- [x] 增加 localStorage 存储处理器
-- [x] 增加 sessionStorage 存储处理器
-- [x] 增加 memory 存储处理器
-- [ ] 增加 IndexDB 存储处理器
-- [ ] 增加 Redis 存储处理器
-
-## Getting Started
+## 快速上手
 
 ### 安装依赖
 
@@ -174,3 +166,12 @@ export class LockerProcessorAbstract {
 }
 
 ```
+
+## Roadmap
+
+- [x] 增加 localStorage 存储处理器
+- [x] 增加 sessionStorage 存储处理器
+- [x] 增加 memory 存储处理器
+- [ ] 支持数据进行加密存储
+- [ ] 增加 IndexDB 存储处理器
+- [ ] 增加 Redis 存储处理器

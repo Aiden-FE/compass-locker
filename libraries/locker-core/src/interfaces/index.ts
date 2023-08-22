@@ -92,12 +92,13 @@ export type LockerItemValue = undefined
 | string
 | number
 | boolean
-| object;
+| object
+| unknown;
 
 /**
  * @description 单个存储单元
  */
-export interface LockerItem {
+export interface LockerItem<Value extends LockerItemValue = string> {
   /**
    * @description 标识key,长度不应超过64位
    */
@@ -106,7 +107,7 @@ export interface LockerItem {
   /**
    * @description 存储值
    */
-  value: LockerItemValue | LockerItemValue[]
+  value: Value | Value[]
 
   /**
    * @description 超时时间, 单位ms, 0=永不超时

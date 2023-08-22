@@ -31,7 +31,11 @@ export default class LockerLocalStorageProcessor extends LockerProcessorAbstract
   // eslint-disable-next-line class-methods-use-this
   async get(key: string) {
     const data = localStorage.getItem(key);
-    return data ? (JSON.parse(data) as OriginLockerItem) : null;
+    try {
+      return data ? (JSON.parse(data) as OriginLockerItem) : null;
+    } catch (e) {
+      return null;
+    }
   }
 
   // eslint-disable-next-line class-methods-use-this
