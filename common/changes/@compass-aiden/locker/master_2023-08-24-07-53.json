@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@compass-aiden/locker",
+      "comment": "fix: eslint",
+      "type": "none"
+    }
+  ],
+  "packageName": "@compass-aiden/locker"
+}
