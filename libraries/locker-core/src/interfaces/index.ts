@@ -74,6 +74,12 @@ export interface LockerSettings<Processor extends LockerProcessorAbstract> {
   autoReadRefresh?: boolean;
 
   /**
+   * @description 数据key的最大长度
+   * @default 255
+   */
+  maxKeyLength?: number;
+
+  /**
    * @description 实例创建完成后的回调函数
    */
   created?: () => void

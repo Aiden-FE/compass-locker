@@ -36,6 +36,7 @@ export default class Locker<Processor extends LockerProcessorAbstract = LockerPr
       autoReadRefresh: opts.autoReadRefresh || false,
       defaultExpires: typeof opts.defaultExpires === 'undefined' ? 1000 * 10 : opts.defaultExpires,
       created: () => {},
+      maxKeyLength: opts.maxKeyLength === undefined ? 255 : opts.maxKeyLength,
     };
     this.logger = new Logger();
     this.logger.updateConfig({
@@ -86,8 +87,8 @@ export default class Locker<Processor extends LockerProcessorAbstract = LockerPr
     value: LockerItemValue | LockerItemValue[],
     opts?: Pick<Partial<LockerItem>, 'expires' | 'autoReadRefresh'>,
   ) {
-    if (key.length > 64) {
-      this.logger.error('key的长度不应超过64位');
+    if (key.length > this.settings.maxKeyLength) {
+      this.logger.error(`key的长度不应超过${this.settings.maxKeyLength}位`);
       return;
     }
     if (!this.processor.validate('setItem')) {
