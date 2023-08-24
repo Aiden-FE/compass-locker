@@ -28,10 +28,6 @@ export interface LockerProcessorInitOption {
   maximum?: number
 }
 
-export interface OriginLockerItem extends LockerItem {
-  value: string
-}
-
 export interface LockerSettings<Processor extends LockerProcessorAbstract> {
   /**
    * @description 实际处理器
@@ -113,7 +109,7 @@ export interface LockerItem<Value extends LockerItemValue = string> {
   /**
    * @description 存储值
    */
-  value: Value | Value[]
+  value: Value
 
   /**
    * @description 超时时间, 单位ms, 0=永不超时
@@ -147,3 +143,5 @@ export interface LockerItem<Value extends LockerItemValue = string> {
    */
   updatedAt: number;
 }
+
+export interface OriginLockerItem extends LockerItem<string> {}
