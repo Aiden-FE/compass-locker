@@ -1,6 +1,13 @@
 # Change Log - @compass-aiden/locker
 
-This log was last generated on Sun, 13 Aug 2023 04:21:42 GMT and should not be manually modified.
+This log was last generated on Thu, 24 Aug 2023 01:58:11 GMT and should not be manually modified.
+
+## 2.0.1
+Thu, 24 Aug 2023 01:58:11 GMT
+
+### Updates
+
+- feat: 数据key的默认长度放开到255且可配置
 
 ## 2.0.0
 Sun, 13 Aug 2023 04:21:42 GMT

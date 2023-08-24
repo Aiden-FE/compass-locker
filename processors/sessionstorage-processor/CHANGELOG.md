@@ -1,6 +1,11 @@
 # Change Log - @compass-aiden/locker-sessionstorage-processor
 
-This log was last generated on Sun, 13 Aug 2023 04:07:10 GMT and should not be manually modified.
+This log was last generated on Thu, 24 Aug 2023 01:58:11 GMT and should not be manually modified.
+
+## 2.0.1
+Thu, 24 Aug 2023 01:58:11 GMT
+
+_Version update only_
 
 ## 2.0.0
 Sun, 13 Aug 2023 04:07:10 GMT

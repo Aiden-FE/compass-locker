@@ -2,6 +2,18 @@
   "name": "@compass-aiden/locker",
   "entries": [
     {
+      "version": "2.0.1",
+      "tag": "@compass-aiden/locker_v2.0.1",
+      "date": "Thu, 24 Aug 2023 01:58:11 GMT",
+      "comments": {
+        "none": [
+          {
+            "comment": "feat: 数据key的默认长度放开到255且可配置"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.0.0",
       "tag": "@compass-aiden/locker_v2.0.0",
       "date": "Sun, 13 Aug 2023 04:21:42 GMT",
