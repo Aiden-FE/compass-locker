@@ -2,6 +2,18 @@
   "name": "@compass-aiden/locker",
   "entries": [
     {
+      "version": "2.0.2",
+      "tag": "@compass-aiden/locker_v2.0.2",
+      "date": "Thu, 24 Aug 2023 07:56:46 GMT",
+      "comments": {
+        "none": [
+          {
+            "comment": "fix: eslint"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.0.1",
       "tag": "@compass-aiden/locker_v2.0.1",
       "date": "Thu, 24 Aug 2023 01:58:11 GMT",
