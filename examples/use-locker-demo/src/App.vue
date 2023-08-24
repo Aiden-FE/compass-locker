@@ -24,7 +24,7 @@ const currentValue = ref('')
 
 const locker = new Locker({
   lockerKey: 'example',
-  processor: new LockerMemoryStorageProcessor(),
+  processor: new LockerLocalStorageProcessor(),
   maximum: 0.001,
   clearGarbageInterval: 10000,
   autoReadRefresh: true,
@@ -32,7 +32,7 @@ const locker = new Locker({
 })
 
 function setStorage() {
-  locker.setItem(currentKey.value, currentValue.value)
+  locker.setItem(currentKey.value, currentValue.value, { expires: 1000 * 60 * 5 })
 }
 async function getStorage() {
   console.log(await locker.getItem(currentKey.value))

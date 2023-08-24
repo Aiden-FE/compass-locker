@@ -42,7 +42,7 @@ export function valueToString(value: LockerItemValue | LockerItemValue[]) {
  * @description 将存储的字符串值转换为实际值
  * @param item
  */
-export function valueStringToValue(item: OriginLockerItem | null): LockerItem | null {
+export function valueStringToValue(item: OriginLockerItem | null): LockerItem<any> | null {
   if (!item) {
     return null;
   }
@@ -74,7 +74,7 @@ export function valueStringToValue(item: OriginLockerItem | null): LockerItem | 
  * @param item
  * @return {boolean} true 过期 false 未过期
  */
-export function isExpired(item: LockerItem) {
+export function isExpired(item: LockerItem<unknown>) {
   return (item.expires !== 0 && Date.now()) > (item.expires + new Date(item.updatedAt).getTime());
 }
 

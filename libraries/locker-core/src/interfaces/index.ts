@@ -19,7 +19,7 @@ export interface LockerProcessorInitOption {
   /**
    * @description 运行实例
    */
-  instance: Locker;
+  instance: Locker<LockerProcessorAbstract>;
 
   /**
    * @description 最大容量限制, 单位MB, 0就是不限制

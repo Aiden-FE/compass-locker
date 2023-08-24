@@ -82,10 +82,10 @@ export default class Locker<Processor extends LockerProcessorAbstract = LockerPr
    * @param opts.expires 超时时间
    * @param opts.autoReadRefresh 读取后是否刷新超时时间
    */
-  async setItem(
+  async setItem<Value extends LockerItemValue>(
     key: string,
-    value: LockerItemValue | LockerItemValue[],
-    opts?: Pick<Partial<LockerItem>, 'expires' | 'autoReadRefresh'>,
+    value: Value,
+    opts?: Partial<Pick<LockerItem<Value>, 'expires' | 'autoReadRefresh'>>,
   ) {
     if (key.length > this.settings.maxKeyLength) {
       this.logger.error(`key的长度不应超过${this.settings.maxKeyLength}位`);

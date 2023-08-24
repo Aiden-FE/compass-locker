@@ -12,7 +12,7 @@ export default class LockerProcessorAbstract {
 
   protected bufferSize = 0;
 
-  protected instance!: Locker;
+  protected instance!: Locker<LockerProcessorAbstract>;
 
   /**
    * @description API 可用性检查
@@ -64,7 +64,7 @@ export default class LockerProcessorAbstract {
    * @abstract
    */
   // eslint-disable-next-line class-methods-use-this
-  async getAllData(): Promise<LockerItem[]> {
+  async getAllData(): Promise<LockerItem<any>[]> {
     this.option.logger.error('处理器未实现 getAllData 方法');
     return [];
   }
@@ -80,7 +80,6 @@ export default class LockerProcessorAbstract {
       : (option.maximum || 0);
     this.instance = option.instance;
     await this.refreshBufferSize();
-    this.option.logger.debug('初始化内存大小', this.bufferSize);
     this.option.logger.debug('许可的最大内存大小', this.maxBufferSize);
   }
 
@@ -101,7 +100,7 @@ export default class LockerProcessorAbstract {
       totalSize += item.size;
       return totalSize;
     }, 0);
-    this.option.logger.debug('当前缓冲区大小: ', this.bufferSize);
+    this.option.logger.debug('当前占用内存大小: ', this.bufferSize);
   });
 
   /**
