@@ -36,26 +36,22 @@
     {
       "packageName": "@compass-aiden/locker",
       "projectFolder": "libraries/locker-core",
-      "reviewCategory": "libraries",
       "versionPolicyName": "locker"
     },
     {
       "packageName": "@compass-aiden/locker-localstorage-processor",
       "projectFolder": "processors/localstorage-processor",
-      "reviewCategory": "processors",
-      "versionPolicyName": "processor"
+      "versionPolicyName": "locker"
     },
     {
       "packageName": "@compass-aiden/locker-sessionstorage-processor",
       "projectFolder": "processors/sessionstorage-processor",
-      "reviewCategory": "processors",
-      "versionPolicyName": "processor"
+      "versionPolicyName": "locker"
     },
     {
       "packageName": "@compass-aiden/locker-memory-processor",
       "projectFolder": "processors/memory-processor",
-      "reviewCategory": "processors",
-      "versionPolicyName": "processor"
+      "versionPolicyName": "locker"
     }
   ]
 }
