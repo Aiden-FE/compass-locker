@@ -1,6 +1,11 @@
 # Change Log - @compass-aiden/locker-localstorage-processor
 
-This log was last generated on Thu, 24 Aug 2023 07:56:46 GMT and should not be manually modified.
+This log was last generated on Tue, 02 Jul 2024 11:40:16 GMT and should not be manually modified.
+
+## 2.0.3
+Tue, 02 Jul 2024 11:40:16 GMT
+
+_Version update only_
 
 ## 2.0.2
 Thu, 24 Aug 2023 07:56:46 GMT

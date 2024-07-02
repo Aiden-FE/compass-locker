@@ -2,6 +2,12 @@
   "name": "@compass-aiden/locker-localstorage-processor",
   "entries": [
     {
+      "version": "2.0.3",
+      "tag": "@compass-aiden/locker-localstorage-processor_v2.0.3",
+      "date": "Tue, 02 Jul 2024 11:40:16 GMT",
+      "comments": {}
+    },
+    {
       "version": "2.0.2",
       "tag": "@compass-aiden/locker-localstorage-processor_v2.0.2",
       "date": "Thu, 24 Aug 2023 07:56:46 GMT",
