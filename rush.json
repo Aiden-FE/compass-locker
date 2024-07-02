@@ -52,6 +52,11 @@
       "packageName": "@compass-aiden/locker-memory-processor",
       "projectFolder": "processors/memory-processor",
       "versionPolicyName": "locker"
+    },
+    {
+      "packageName": "@compass-aiden/locker-indexdb-processor",
+      "projectFolder": "processors/indexdb-processor",
+      "versionPolicyName": "locker"
     }
   ]
 }

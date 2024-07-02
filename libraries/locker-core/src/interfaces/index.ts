@@ -32,7 +32,7 @@ export interface LockerSettings<Processor extends LockerProcessorAbstract> {
   /**
    * @description 实际处理器
    */
-  processor: Processor
+  processor: Processor | Processor[]
 
   /**
    * @description 唯一存储key,用来跟其他Locker实例区分

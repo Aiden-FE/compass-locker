@@ -25,7 +25,9 @@ export default class Locker<Processor extends LockerProcessorAbstract = LockerPr
   private garbageTimer?: number;
 
   constructor(opts: LockerSettings<Processor>) {
-    this.processor = opts.processor;
+    const processors = Array.isArray(opts.processor) ? opts.processor : [opts.processor];
+    const availableProcessor = processors.find((processor) => processor.validate('setItem'));
+    this.processor = availableProcessor || processors[0];
     this.settings = {
       lockerKey: opts.lockerKey || 'default',
       clearGarbageInterval: opts.clearGarbageInterval === undefined

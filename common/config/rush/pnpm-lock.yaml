@@ -11,6 +11,7 @@ importers:
       '@babel/preset-env': ^7.16.11
       '@babel/preset-typescript': ^7.16.7
       '@compass-aiden/locker': workspace:*
+      '@compass-aiden/locker-indexdb-processor': workspace:*
       '@compass-aiden/locker-localstorage-processor': workspace:*
       '@compass-aiden/locker-memory-processor': workspace:*
       '@types/jest': ~28.1.6
@@ -37,6 +38,7 @@ importers:
       vue-tsc: ^0.29.8
     dependencies:
       '@compass-aiden/locker': link:../../libraries/locker-core
+      '@compass-aiden/locker-indexdb-processor': link:../../processors/indexdb-processor
       '@compass-aiden/locker-localstorage-processor': link:../../processors/localstorage-processor
       '@compass-aiden/locker-memory-processor': link:../../processors/memory-processor
       '@vueuse/core': 8.9.4_vue@3.2.37
@@ -105,6 +107,63 @@ importers:
       '@rollup/plugin-node-resolve': 13.3.0_rollup@2.75.7
       '@types/jest': 28.1.6
       '@types/lodash-es': 4.17.8
+      '@typescript-eslint/eslint-plugin': 5.27.1_302bd1de818d629014fc6f934ba5b515
+      '@typescript-eslint/parser': 5.27.1_eslint@8.17.0+typescript@4.7.4
+      '@zerollup/ts-transform-paths': 1.7.18_typescript@4.7.4
+      eslint: 8.17.0
+      eslint-config-airbnb-base: 15.0.0_de2e8b5f32821e366389b4575f54c566
+      eslint-config-airbnb-typescript: 17.0.0_9bfc1d33ec49011a5178aa57e6fb2450
+      eslint-plugin-import: 2.26.0_eslint@8.17.0
+      jest: 28.1.3
+      rimraf: 3.0.2
+      rollup: 2.75.7
+      rollup-plugin-cleanup: 3.2.1_rollup@2.75.7
+      rollup-plugin-serve: 1.1.0
+      rollup-plugin-summary: 1.4.3_rollup@2.75.7
+      rollup-plugin-terser: 7.0.2_rollup@2.75.7
+      rollup-plugin-ts: 3.0.2_rollup@2.75.7+typescript@4.7.4
+      rollup-plugin-visualizer: 5.6.0_rollup@2.75.7
+      ts-jest: 28.0.7_jest@28.1.3+typescript@4.7.4
+      typedoc: 0.22.18_typescript@4.7.4
+      typescript: 4.7.4
+
+  ../../processors/indexdb-processor:
+    specifiers:
+      '@ampproject/rollup-plugin-closure-compiler': ~0.27.0
+      '@compass-aiden/locker': workspace:*
+      '@rollup/plugin-commonjs': ~22.0.1
+      '@rollup/plugin-json': ~4.1.0
+      '@rollup/plugin-node-resolve': ~13.3.0
+      '@types/jest': ~28.1.6
+      '@typescript-eslint/eslint-plugin': ~5.27.1
+      '@typescript-eslint/parser': ~5.27.1
+      '@zerollup/ts-transform-paths': ~1.7.18
+      eslint: ~8.17.0
+      eslint-config-airbnb-base: ~15.0.0
+      eslint-config-airbnb-typescript: ~17.0.0
+      eslint-plugin-import: ~2.26.0
+      idb-keyval: ~6.2.1
+      jest: ~28.1.3
+      rimraf: ~3.0.2
+      rollup: ~2.75.7
+      rollup-plugin-cleanup: ~3.2.1
+      rollup-plugin-serve: ~1.1.0
+      rollup-plugin-summary: ~1.4.3
+      rollup-plugin-terser: ~7.0.2
+      rollup-plugin-ts: ~3.0.2
+      rollup-plugin-visualizer: ~5.6.0
+      ts-jest: ~28.0.7
+      typedoc: ^0.22.18
+      typescript: ~4.7.4
+    dependencies:
+      '@compass-aiden/locker': link:../../libraries/locker-core
+      idb-keyval: 6.2.1
+    devDependencies:
+      '@ampproject/rollup-plugin-closure-compiler': 0.27.0_rollup@2.75.7
+      '@rollup/plugin-commonjs': 22.0.1_rollup@2.75.7
+      '@rollup/plugin-json': 4.1.0_rollup@2.75.7
+      '@rollup/plugin-node-resolve': 13.3.0_rollup@2.75.7
+      '@types/jest': 28.1.6
       '@typescript-eslint/eslint-plugin': 5.27.1_302bd1de818d629014fc6f934ba5b515
       '@typescript-eslint/parser': 5.27.1_eslint@8.17.0+typescript@4.7.4
       '@zerollup/ts-transform-paths': 1.7.18_typescript@4.7.4
@@ -4513,6 +4572,10 @@ packages:
     resolution: {integrity: sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==}
     engines: {node: '>=10.17.0'}
     dev: true
+
+  /idb-keyval/6.2.1:
+    resolution: {integrity: sha512-8Sb3veuYCyrZL+VBt9LJfZjLUPWVvqn8tG28VqYNFCo43KHcKuq+b4EiXGeuaLAQWL2YmyDgMp2aSpH9JHsEQg==}
+    dev: false
 
   /ignore/5.2.0:
     resolution: {integrity: sha512-CmxgYGiEPCLhfLnpPp1MoRmifwEIOgjcHXxOBjv7mY96c+eWScsOP9c112ZyLdWHi0FxHjI+4uVhKYp/gcdRmQ==}

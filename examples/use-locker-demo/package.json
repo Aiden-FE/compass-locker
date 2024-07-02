@@ -37,7 +37,8 @@
     "vue-router": "4",
     "@compass-aiden/locker": "workspace:*",
     "@compass-aiden/locker-localstorage-processor": "workspace:*",
-    "@compass-aiden/locker-memory-processor": "workspace:*"
+    "@compass-aiden/locker-memory-processor": "workspace:*",
+    "@compass-aiden/locker-indexdb-processor": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",

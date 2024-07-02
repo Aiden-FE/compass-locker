@@ -9,6 +9,7 @@
 * 无依赖的核心模块,Gzip后仅3.88kB
 * 可控制存储数据的失效时间,并支持数据读取后刷新失效时间
 * 支持限制存储数据的最大容量
+* 处理器实例支持自动降级
 
 ## 快速上手
 
@@ -25,17 +26,32 @@
 * `@compass-aiden/locker-localstorage-processor` localStorage处理器,可运行在web环境中
 * `@compass-aiden/locker-sessionstorage-processor` sessionStorage处理器,可运行在web环境中
 * `@compass-aiden/locker-memory-processor` memory处理器,可运行在任何js环境中
+* `@compass-aiden/locker-indexdb-processor` IndexDB处理器,可运行在支持IndexDB的环境中
 
 ### 使用
 
 ```typescript
 import {Locker} from "@compass-aiden/locker";
 import LockerLocalStorageProcessor from "@compass-aiden/locker-localstorage-processor";
+import LockerSessionStorageProcessor from "@compass-aiden/locker-sessionstorage-processor";
+import LockerMemoryStorageProcessor from "@compass-aiden/locker-memory-processor";
+import LockerIndexDBStorageProcessor from "@compass-aiden/locker-indexdb-processor";
 
 // 初始化实例
 const localLocker = new Locker({
   processor: new LockerLocalStorageProcessor(), // 实际处理器,可任意替换当前环境可用的处理器
   lockerKey: 'user_id', // 可选, 唯一存储key,用来跟其他Locker实例区分或用来隔离用户数据
+  // 更多可配置项参考下方 初始化配置项
+});
+
+// 可以自动降级的实例
+const localAutoLocker = new Locker({
+  processor: [
+    new LockerLocalStorageProcessor(),
+    new LockerSessionStorageProcessor(),
+    new LockerMemoryStorageProcessor(),
+  ], // 从左往右依次调用validate确认 setItem API可用性,决定当前实际采用的处理器
+  lockerKey: 'user_id2', // 可选, 唯一存储key,用来跟其他Locker实例区分或用来隔离用户数据
   // 更多可配置项参考下方 初始化配置项
 });
 
@@ -172,6 +188,4 @@ export class LockerProcessorAbstract {
 - [x] 增加 localStorage 存储处理器
 - [x] 增加 sessionStorage 存储处理器
 - [x] 增加 memory 存储处理器
-- [ ] 支持数据进行加密存储
-- [ ] 增加 IndexDB 存储处理器
-- [ ] 增加 Redis 存储处理器
+- [x] 增加 IndexDB 存储处理器

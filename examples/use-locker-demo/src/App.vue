@@ -18,13 +18,18 @@
 import {Locker} from "@compass-aiden/locker";
 import LockerLocalStorageProcessor from "@compass-aiden/locker-localstorage-processor";
 import LockerMemoryStorageProcessor from "@compass-aiden/locker-memory-processor";
+import LockerIndexDBStorageProcessor from "@compass-aiden/locker-indexdb-processor";
 
 const currentKey = ref('')
 const currentValue = ref('')
 
 const locker = new Locker({
   lockerKey: 'example',
-  processor: new LockerLocalStorageProcessor(),
+  processor: [
+    new LockerIndexDBStorageProcessor(),
+    new LockerLocalStorageProcessor(),
+    new LockerMemoryStorageProcessor(),
+  ],
   maximum: 0.001,
   clearGarbageInterval: 10000,
   autoReadRefresh: true,
