@@ -27,6 +27,7 @@ export default class Locker<Processor extends LockerProcessorAbstract = LockerPr
   constructor(opts: LockerSettings<Processor>) {
     const processors = Array.isArray(opts.processor) ? opts.processor : [opts.processor];
     const availableProcessor = processors.find((processor) => processor.validate('setItem'));
+    // 优先使用可用的processor
     this.processor = availableProcessor || processors[0];
     this.settings = {
       lockerKey: opts.lockerKey || 'default',
