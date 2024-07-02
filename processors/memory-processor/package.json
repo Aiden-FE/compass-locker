@@ -1,6 +1,6 @@
 {
   "name": "@compass-aiden/locker-memory-processor",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "memory处理器",
   "main": "dist/main.js",
   "types": "types/main.d.ts",
